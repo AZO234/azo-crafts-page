@@ -40,10 +40,26 @@ jobs:
       - name: Generate static site
         run: pnpm run generate
 
-      # lftp で FTP デプロイ
-      # SamKirkland/FTP-Deploy-Action より互換性が高い
       - name: Install lftp
         run: sudo apt-get install -y lftp
+
+      # まず接続テスト（ls だけ）
+      - name: FTP connection test
+        env:
+          FTP_HOST:     ${{ secrets.FTP_HOST }}
+          FTP_USER:     ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp -d -c "
+            set ftp:ssl-allow no;
+            set ftp:passive-mode yes;
+            set net:timeout 30;
+            set net:max-retries 2;
+            set net:reconnect-interval-base 5;
+            open -u \"$FTP_USER\",\"$FTP_PASSWORD\" ftp://$FTP_HOST;
+            ls;
+            bye
+          "
 
       - name: Deploy via lftp
         env:
@@ -54,9 +70,11 @@ jobs:
         run: |
           lftp -c "
             set ftp:ssl-allow no;
+            set ftp:passive-mode yes;
             set net:timeout 30;
             set net:max-retries 3;
-            open -u '$FTP_USER','$FTP_PASSWORD' ftp://$FTP_HOST;
+            set net:reconnect-interval-base 5;
+            open -u \"$FTP_USER\",\"$FTP_PASSWORD\" ftp://$FTP_HOST;
             mirror --reverse --delete --verbose \
               --exclude .htaccess \
               --exclude-glob old/ \
