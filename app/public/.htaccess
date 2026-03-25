@@ -1,0 +1,51 @@
+# ── AZO crafts page — さくらインターネット Apache 設定 ──────
+
+# 文字コード
+AddDefaultCharset UTF-8
+
+# Gzip圧縮
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+# キャッシュ制御
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html              "access plus 0 seconds"
+  ExpiresByType text/css               "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png              "access plus 1 year"
+  ExpiresByType image/webp             "access plus 1 year"
+  ExpiresByType image/svg+xml          "access plus 1 year"
+  ExpiresByType font/woff2             "access plus 1 year"
+</IfModule>
+
+# ── SPA / SSG フォールバック ──────────────────────────────
+# /github /articles /shopping などのパスを
+# それぞれ生成済みの index.html に向ける
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 実ファイル・ディレクトリが存在する場合はそのまま
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # /github → /github/index.html
+  RewriteRule ^github/?$   /github/index.html [L]
+  # /articles → /articles/index.html
+  RewriteRule ^articles/?$ /articles/index.html [L]
+  # /shopping → /shopping/index.html
+  RewriteRule ^shopping/?$ /shopping/index.html [L]
+
+  # それ以外の未知のパスはトップへ
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+# セキュリティヘッダー
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
