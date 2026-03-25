@@ -51,7 +51,8 @@ jobs:
           local-dir:  .output/public/
           server-dir: ${{ secrets.FTP_REMOTE_DIR }}
           dangerous-clean-slate: false
-          protocol: ftps
+          protocol: ftp
+          port: 21
           exclude: |
             **/.htaccess
             **/old/**
