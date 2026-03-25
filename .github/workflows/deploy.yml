@@ -21,6 +21,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: '10'
 
       - name: Get pnpm store directory
         id: pnpm-cache
@@ -37,25 +39,32 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # buildDate は nuxt.config.ts 内でビルド時に JST 日付を自動生成
       - name: Generate static site
         run: pnpm run generate
 
-      # FTP でさくらにデプロイ（FTPS / 差分転送）
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server:   ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir:  .output/public/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
-          dangerous-clean-slate: false
-          protocol: ftp
-          port: 21
-          exclude: |
-            **/.htaccess
-            **/old/**
+      # lftp で FTP デプロイ
+      # SamKirkland/FTP-Deploy-Action より互換性が高い
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy via lftp
+        env:
+          FTP_HOST:       ${{ secrets.FTP_HOST }}
+          FTP_USER:       ${{ secrets.FTP_USER }}
+          FTP_PASSWORD:   ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        run: |
+          lftp -c "
+            set ftp:ssl-allow no;
+            set net:timeout 30;
+            set net:max-retries 3;
+            open -u '$FTP_USER','$FTP_PASSWORD' ftp://$FTP_HOST;
+            mirror --reverse --delete --verbose \
+              --exclude .htaccess \
+              --exclude-glob old/ \
+              .output/public/ $FTP_REMOTE_DIR;
+            bye
+          "
 
       - name: Done
         run: echo "✅ Deployed to https://domisan.sakura.ne.jp/"
