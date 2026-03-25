@@ -63,7 +63,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: ['/', '/github', '/articles', '/shopping'],
+      routes: ['/', '/github', '/articles', '/shopping', '/emulator'],
       crawlLinks: true,
     },
   },

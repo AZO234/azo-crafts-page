@@ -42,13 +42,6 @@ function openModal(p: { title: string; thumb: string; href?: string }) {
 
 const projects = [
   {
-    tag: 'Web App', icon: 'simple-icons:vuedotjs',
-    thumb: '/screenshots/stereo-viewer-gh.webp',
-    title: 'STEREO VIEWER',
-    desc: 'SBS（.jps/.pns）立体画像疑似閲覧ビューア。Vue3 + TypeScript + Bootstrap5。',
-    href: 'https://github.com/AZO234/stereo-viewer', linkLabel: 'GitHub',
-  },
-  {
     tag: 'Emulator', icon: 'bi:controller',
     thumb: '/screenshots/np2kai.webp',
     title: 'Neko Project II kai',

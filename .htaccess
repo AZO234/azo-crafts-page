@@ -1,0 +1,47 @@
+# ── AZO crafts page — さくらインターネット Apache 設定 ──────
+
+AddDefaultCharset UTF-8
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html              "access plus 0 seconds"
+  ExpiresByType text/css               "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png              "access plus 1 year"
+  ExpiresByType image/webp             "access plus 1 year"
+  ExpiresByType image/svg+xml          "access plus 1 year"
+  ExpiresByType font/woff2             "access plus 1 year"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # /old/ 以下は除外（REQUEST_URI で判定）
+  RewriteCond %{REQUEST_URI} ^/old/ [OR]
+  RewriteCond %{REQUEST_URI} ^/old$
+  RewriteRule ^ - [L]
+
+  # 実ファイルはそのまま
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # SSGページへのルーティング
+  RewriteRule ^emulator/?$ /emulator/index.html [L]
+  RewriteRule ^github/?$   /github/index.html [L]
+  RewriteRule ^articles/?$ /articles/index.html [L]
+  RewriteRule ^shopping/?$ /shopping/index.html [L]
+
+  # それ以外はトップへ
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
