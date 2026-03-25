@@ -43,26 +43,6 @@ jobs:
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      # デバッグ用：ls だけ実行して接続・ログイン・ディレクトリ確認
-      - name: FTP debug (ls only)
-        env:
-          FTP_HOST:       ${{ secrets.FTP_HOST }}
-          FTP_USER:       ${{ secrets.FTP_USER }}
-          FTP_PASSWORD:   ${{ secrets.FTP_PASSWORD }}
-          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
-        run: |
-          FTP_IP=$(dig +short "$FTP_HOST" | head -1)
-          lftp -d -c "
-            set ftp:ssl-allow no;
-            set ftp:passive-mode yes;
-            set net:timeout 30;
-            set net:max-retries 1;
-            open -u \"$FTP_USER\",\"$FTP_PASSWORD\" ftp://$FTP_IP;
-            pwd;
-            ls;
-            bye
-          "
-
       - name: Deploy via lftp
         env:
           FTP_HOST:       ${{ secrets.FTP_HOST }}
@@ -71,13 +51,26 @@ jobs:
           FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
         run: |
           FTP_IP=$(dig +short "$FTP_HOST" | head -1)
+
+          # ~/.lftprc にパスワードを書き込み、シェル展開を回避
+          cat > ~/.lftprc << LFTPRC
+          set ftp:ssl-allow no
+          set ftp:passive-mode yes
+          set net:timeout 30
+          set net:max-retries 3
+          set net:reconnect-interval-base 5
+          LFTPRC
+
+          # netrc でパスワードを渡す（特殊文字も安全）
+          cat > ~/.netrc << NETRC
+          machine $FTP_IP
+          login $FTP_USER
+          password $FTP_PASSWORD
+          NETRC
+          chmod 600 ~/.netrc
+
           lftp -c "
-            set ftp:ssl-allow no;
-            set ftp:passive-mode yes;
-            set net:timeout 30;
-            set net:max-retries 3;
-            set net:reconnect-interval-base 5;
-            open -u \"$FTP_USER\",\"$FTP_PASSWORD\" ftp://$FTP_IP;
+            open ftp://$FTP_IP;
             mirror --reverse --delete --verbose \
               --exclude .htaccess \
               --exclude-glob old/ \
