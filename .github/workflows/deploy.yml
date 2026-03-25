@@ -49,16 +49,15 @@ jobs:
           FTP_USER:     ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          # ~/.netrc でパスワードを安全に渡す
-          cat > ~/.netrc << EOF
-          machine $FTP_HOST
-          login $FTP_USER
-          password $FTP_PASSWORD
-          EOF
+          # printf で netrc を書く（インデント問題を回避）
+          printf 'machine %s\nlogin %s\npassword %s\n' \
+            "$FTP_HOST" "$FTP_USER" "$FTP_PASSWORD" > ~/.netrc
           chmod 600 ~/.netrc
 
-          # FFFTPログと同じ手順で接続:
-          # AUTH TLS → PBSZ 0 → PROT P → USER → PASS → PASV
+          # 確認（パスワードは表示しない）
+          echo "netrc machine: $(grep machine ~/.netrc)"
+          echo "netrc login:   $(grep login ~/.netrc)"
+
           lftp -c "
             set ftp:ssl-auth TLS;
             set ftp:ssl-force yes;
