@@ -25,10 +25,11 @@ import { useAppState } from '~/composables/useAppState'
 const { t } = useAppState()
 
 const navItems = computed(() => [
-  { to: '/',         icon: 'bi:grid-fill', label: t.value.nav.webApps  },
-  { to: '/github',   icon: 'bi:github',    label: t.value.nav.github   },
-  { to: '/articles', icon: 'bi:card-list', label: t.value.nav.articles },
-  { to: '/shopping', icon: 'bi:cart3',     label: t.value.nav.shopping },
+  { to: '/',         icon: 'bi:grid-fill',    label: t.value.nav.webApps  },
+  { to: '/emulator', icon: 'bi:controller',   label: t.value.nav.emulator },
+  { to: '/shopping', icon: 'bi:cart3',        label: t.value.nav.shopping },
+  { to: '/articles', icon: 'bi:card-list',    label: t.value.nav.articles },
+  { to: '/github',   icon: 'bi:github',       label: t.value.nav.github   },
 ])
 </script>
 

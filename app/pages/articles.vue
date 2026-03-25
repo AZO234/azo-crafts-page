@@ -56,13 +56,6 @@ const articles = [
     href: 'https://domisan.sakura.ne.jp/article/psxpad/psxpad.html',
   },
   {
-    tag: 'Emulator', icon: 'bi:controller',
-    thumb: '/screenshots/np2kai-article.webp',
-    title: 'Neko Project II (NP2) 改変',
-    desc: 'PC-98エミュレータ NP2 0.86 kai の改変・ビルド手順解説。',
-    href: 'https://domisan.sakura.ne.jp/article/np2kai/np2kai.html',
-  },
-  {
     tag: 'Arduino', icon: 'simple-icons:arduino',
     thumb: '/screenshots/arduino-psxpad.webp',
     title: 'PSX Joypad Library for Arduino IDE',
@@ -131,27 +124,6 @@ const articles = [
     title: 'CAD用ストロークフォント「AZOmix」',
     desc: 'CAD向けベクターフォント「AZOmix」の解説・配布。',
     href: 'https://domisan.sakura.ne.jp/article/cadfont/cadfont.html',
-  },
-  {
-    tag: 'Retro', icon: 'bi:cpu-fill',
-    thumb: '/screenshots/pc88.webp',
-    title: 'PC-8801 保全情報',
-    desc: 'レトロPC「PC-8801」の保全・メンテナンス情報。',
-    href: 'https://domisan.sakura.ne.jp/article/pc88/pc88.html',
-  },
-  {
-    tag: 'Retro', icon: 'bi:cpu-fill',
-    thumb: '/screenshots/msx.webp',
-    title: 'MSX 保全情報',
-    desc: 'レトロPC「MSX」の保全・メンテナンス情報。',
-    href: 'https://domisan.sakura.ne.jp/article/msx/msx.html',
-  },
-  {
-    tag: 'Retro', icon: 'bi:controller',
-    thumb: '/screenshots/retroarch.webp',
-    title: 'RetroArch マルチエミュレータ',
-    desc: 'マルチエミュレータシステム「RetroArch」の導入・設定ガイド。',
-    href: 'https://domisan.sakura.ne.jp/article/retroarch/retroarch.html',
   },
   {
     tag: '曲線', icon: 'bi:bezier2',
