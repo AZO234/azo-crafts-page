@@ -14,54 +14,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
-
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.dir }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Generate static site
-        run: pnpm run generate
-
-      # ホスト名をIPに解決（HOST コマンド回避）
-      - name: Resolve FTP host to IP
-        id: resolve
+      # curl で生のFTP通信を確認（最もシンプルな接続テスト）
+      - name: FTP login test with curl
+        env:
+          FTP_HOST:     ${{ secrets.FTP_HOST }}
+          FTP_USER:     ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          FTP_IP=$(dig +short "${{ secrets.FTP_HOST }}" | head -1)
-          echo "ip=$FTP_IP" >> $GITHUB_OUTPUT
-          echo "Resolved: ${{ secrets.FTP_HOST }} -> $FTP_IP"
-
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server:   ${{ steps.resolve.outputs.ip }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir:  .output/public/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
-          dangerous-clean-slate: false
-          protocol: ftp
-          port: 21
-          exclude: |
-            **/.htaccess
-            **/old/**
-
-      - name: Done
-        run: echo "✅ Deployed to https://domisan.sakura.ne.jp/"
+          FTP_IP=$(dig +short "$FTP_HOST" | head -1)
+          echo "IP: $FTP_IP"
+          # curl でFTPログインして PWD だけ実行
+          curl -v \
+            --ftp-ssl-reqd false \
+            --insecure \
+            --user "$FTP_USER:$FTP_PASSWORD" \
+            "ftp://$FTP_IP/" \
+            --quote "PWD" \
+            2>&1 | grep -E "< |> |Connected|Login|530|220|331|230|Error|curl"
