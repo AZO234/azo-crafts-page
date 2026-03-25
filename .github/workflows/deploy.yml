@@ -40,14 +40,18 @@ jobs:
       - name: Generate static site
         run: pnpm run generate
 
+      # 生成ディレクトリを確認
+      - name: Check output directory
+        run: ls -la .output/public/
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
-          server:     ${{ secrets.FTP_HOST }}
-          username:   ${{ secrets.FTP_USER }}
-          password:   ${{ secrets.FTP_PASSWORD }}
-          server-dir: /home/domisan/www/
-          timeout:    60000
+          server:      ${{ secrets.FTP_HOST }}
+          username:    ${{ secrets.FTP_USER }}
+          password:    ${{ secrets.FTP_PASSWORD }}
+          local-dir:   ./.output/public/
+          server-dir:  /home/domisan/www/
           exclude: |
             **/.htaccess
             **/old/**
