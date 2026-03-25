@@ -40,22 +40,41 @@ jobs:
       - name: Generate static site
         run: pnpm run generate
 
-      # FFFTPログと同じ条件：FTPES (Explicit TLS) + パッシブ
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server:   ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir:  .output/public/
-          server-dir: /home/domisan/www/
-          dangerous-clean-slate: false
-          protocol: ftps        # FTPES (Explicit TLS)
-          port: 21
-          security: loose       # 自己署名証明書を許容
-          exclude: |
-            **/.htaccess
-            **/old/**
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy via lftp (FTPES)
+        env:
+          FTP_HOST:     ${{ secrets.FTP_HOST }}
+          FTP_USER:     ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          # ~/.netrc でパスワードを安全に渡す
+          cat > ~/.netrc << EOF
+          machine $FTP_HOST
+          login $FTP_USER
+          password $FTP_PASSWORD
+          EOF
+          chmod 600 ~/.netrc
+
+          # FFFTPログと同じ手順で接続:
+          # AUTH TLS → PBSZ 0 → PROT P → USER → PASS → PASV
+          lftp -c "
+            set ftp:ssl-auth TLS;
+            set ftp:ssl-force yes;
+            set ftp:ssl-protect-data yes;
+            set ftp:ssl-protect-list yes;
+            set ftp:passive-mode yes;
+            set ssl:verify-certificate no;
+            set net:timeout 30;
+            set net:max-retries 3;
+            open ftp://$FTP_HOST;
+            mirror --reverse --delete --verbose \
+              --exclude .htaccess \
+              --exclude-glob old/ \
+              .output/public/ /home/domisan/www/;
+            bye
+          "
 
       - name: Done
         run: echo "✅ Deployed to https://domisan.sakura.ne.jp/"
