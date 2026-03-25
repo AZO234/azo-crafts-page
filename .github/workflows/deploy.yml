@@ -50,14 +50,17 @@ jobs:
           FTP_PASSWORD:   ${{ secrets.FTP_PASSWORD }}
           FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
         run: |
+          # IPアドレスで接続することで HOST コマンドを回避
+          FTP_IP=$(dig +short "$FTP_HOST" | head -1)
+          echo "Connecting to $FTP_HOST via IP: $FTP_IP"
+
           lftp -c "
             set ftp:ssl-allow no;
             set ftp:passive-mode yes;
-            set ftp:use-host no;
             set net:timeout 30;
             set net:max-retries 3;
             set net:reconnect-interval-base 5;
-            open -u \"$FTP_USER\",\"$FTP_PASSWORD\" ftp://$FTP_HOST;
+            open -u \"$FTP_USER\",\"$FTP_PASSWORD\" ftp://$FTP_IP;
             mirror --reverse --delete --verbose \
               --exclude .htaccess \
               --exclude-glob old/ \
