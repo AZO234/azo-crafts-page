@@ -60,6 +60,7 @@ jobs:
             **/.git*/**
             **/.htaccess
             **/old/**
+            **/200.html
 
       - name: Done
         run: echo "✅ Deployed to https://domisan.sakura.ne.jp/"
