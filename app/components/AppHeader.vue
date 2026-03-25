@@ -3,9 +3,9 @@
 
     <!-- ── LOGO ── -->
     <div class="sv-logo">
-      <div class="logo-mark"><span /><span /><span /><span /></div>
+      <div class="logo-mark"><img src="favicon512.png" width="48" alt="logo"></div>
       <div class="logo-text">
-        <h1>AZO CRAFTS</h1>
+        <h1>AZO crafts page</h1>
         <small>OSS ENGINEER — HIROSHIMA, JAPAN</small>
       </div>
       <!-- SNSバー（ロゴの右に縦並び） -->
