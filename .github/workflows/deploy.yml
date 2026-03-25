@@ -17,23 +17,7 @@ jobs:
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      - name: Check secret values
-        env:
-          FTP_HOST:     ${{ secrets.FTP_HOST }}
-          FTP_USER:     ${{ secrets.FTP_USER }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          # 各Secretの文字数と内容（パスワードは長さのみ）を確認
-          echo "FTP_HOST length:     ${#FTP_HOST}"
-          echo "FTP_HOST value:      $FTP_HOST"
-          echo "FTP_USER length:     ${#FTP_USER}"
-          echo "FTP_USER value:      $FTP_USER"
-          echo "FTP_PASSWORD length: ${#FTP_PASSWORD}"
-          # パスワードの先頭1文字と末尾1文字だけ表示（内容確認用）
-          echo "FTP_PASSWORD first:  ${FTP_PASSWORD:0:1}"
-          echo "FTP_PASSWORD last:   ${FTP_PASSWORD: -1}"
-
-      - name: Auth debug (python script)
+      - name: Test plain FTP (no TLS)
         env:
           FTP_HOST:     ${{ secrets.FTP_HOST }}
           FTP_USER:     ${{ secrets.FTP_USER }}
@@ -44,16 +28,10 @@ jobs:
           host = os.environ['FTP_HOST']
           user = os.environ['FTP_USER']
           pw   = os.environ['FTP_PASSWORD']
-          print(f'host={repr(host)}')
-          print(f'user={repr(user)}')
-          print(f'pw_len={len(pw)}')
-          with open('/tmp/lftp_script', 'w') as f:
-              f.write('set ftp:ssl-auth TLS\n')
-              f.write('set ftp:ssl-force yes\n')
-              f.write('set ftp:ssl-protect-data yes\n')
-              f.write('set ftp:ssl-protect-list yes\n')
+          with open('/tmp/lftp_plain', 'w') as f:
+              f.write('set ftp:ssl-allow no\n')
+              f.write('set ftp:ssl-force no\n')
               f.write('set ftp:passive-mode yes\n')
-              f.write('set ssl:verify-certificate no\n')
               f.write('set net:timeout 15\n')
               f.write('set net:max-retries 1\n')
               f.write(f'open ftp://{host}\n')
@@ -61,5 +39,5 @@ jobs:
               f.write('pwd\n')
               f.write('bye\n')
           "
-          lftp -d -f /tmp/lftp_script 2>&1
-          rm -f /tmp/lftp_script
+          lftp -d -f /tmp/lftp_plain 2>&1
+          rm -f /tmp/lftp_plain
