@@ -3,7 +3,7 @@
 
     <!-- ── LOGO ── -->
     <div class="sv-logo">
-      <div class="logo-mark"><img src="/favicon512.png" width="48" alt="logo"></div>
+      <div class="logo-mark"><img src="/favicon512.png" width="48" alt="logo" /></div>
       <div class="logo-text">
         <h1>AZO crafts page</h1>
         <small>OSS ENGINEER — HIROSHIMA, JAPAN</small>
@@ -108,14 +108,9 @@ const emit = defineEmits<{
 }
 
 .logo-mark {
-  width: 32px; height: 32px;
   border: 2px solid var(--accent); border-radius: 4px;
-  display: grid; grid-template-columns: 1fr 1fr;
   gap: 3px; padding: 5px; flex-shrink: 0;
 }
-.logo-mark span { border-radius: 1px; }
-.logo-mark span:nth-child(odd)  { background: var(--accent); }
-.logo-mark span:nth-child(even) { background: var(--accent2); }
 
 .logo-text h1 {
   font-family: var(--mono); font-size: 1rem;
