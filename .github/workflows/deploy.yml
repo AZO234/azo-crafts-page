@@ -40,43 +40,28 @@ jobs:
       - name: Generate static site
         run: pnpm run generate
 
-      - name: Install lftp
-        run: sudo apt-get install -y lftp
-
-      - name: Deploy via lftp
-        env:
-          FTP_HOST:       ${{ secrets.FTP_HOST }}
-          FTP_USER:       ${{ secrets.FTP_USER }}
-          FTP_PASSWORD:   ${{ secrets.FTP_PASSWORD }}
-          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+      # ホスト名をIPに解決（HOST コマンド回避）
+      - name: Resolve FTP host to IP
+        id: resolve
         run: |
-          FTP_IP=$(dig +short "$FTP_HOST" | head -1)
+          FTP_IP=$(dig +short "${{ secrets.FTP_HOST }}" | head -1)
+          echo "ip=$FTP_IP" >> $GITHUB_OUTPUT
+          echo "Resolved: ${{ secrets.FTP_HOST }} -> $FTP_IP"
 
-          # ~/.lftprc にパスワードを書き込み、シェル展開を回避
-          cat > ~/.lftprc << LFTPRC
-          set ftp:ssl-allow no
-          set ftp:passive-mode yes
-          set net:timeout 30
-          set net:max-retries 3
-          set net:reconnect-interval-base 5
-          LFTPRC
-
-          # netrc でパスワードを渡す（特殊文字も安全）
-          cat > ~/.netrc << NETRC
-          machine $FTP_IP
-          login $FTP_USER
-          password $FTP_PASSWORD
-          NETRC
-          chmod 600 ~/.netrc
-
-          lftp -c "
-            open ftp://$FTP_IP;
-            mirror --reverse --delete --verbose \
-              --exclude .htaccess \
-              --exclude-glob old/ \
-              .output/public/ $FTP_REMOTE_DIR;
-            bye
-          "
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server:   ${{ steps.resolve.outputs.ip }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir:  .output/public/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          dangerous-clean-slate: false
+          protocol: ftp
+          port: 21
+          exclude: |
+            **/.htaccess
+            **/old/**
 
       - name: Done
         run: echo "✅ Deployed to https://domisan.sakura.ne.jp/"
