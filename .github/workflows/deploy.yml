@@ -43,6 +43,26 @@ jobs:
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
+      # デバッグ用：ls だけ実行して接続・ログイン・ディレクトリ確認
+      - name: FTP debug (ls only)
+        env:
+          FTP_HOST:       ${{ secrets.FTP_HOST }}
+          FTP_USER:       ${{ secrets.FTP_USER }}
+          FTP_PASSWORD:   ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        run: |
+          FTP_IP=$(dig +short "$FTP_HOST" | head -1)
+          lftp -d -c "
+            set ftp:ssl-allow no;
+            set ftp:passive-mode yes;
+            set net:timeout 30;
+            set net:max-retries 1;
+            open -u \"$FTP_USER\",\"$FTP_PASSWORD\" ftp://$FTP_IP;
+            pwd;
+            ls;
+            bye
+          "
+
       - name: Deploy via lftp
         env:
           FTP_HOST:       ${{ secrets.FTP_HOST }}
@@ -50,10 +70,7 @@ jobs:
           FTP_PASSWORD:   ${{ secrets.FTP_PASSWORD }}
           FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
         run: |
-          # IPアドレスで接続することで HOST コマンドを回避
           FTP_IP=$(dig +short "$FTP_HOST" | head -1)
-          echo "Connecting to $FTP_HOST via IP: $FTP_IP"
-
           lftp -c "
             set ftp:ssl-allow no;
             set ftp:passive-mode yes;
