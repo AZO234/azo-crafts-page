@@ -1,7 +1,11 @@
 <template>
   <div class="sv-card">
     <!-- サムネイル -->
-    <div class="card-thumb" @click="thumb && emit('thumb-click', { title, thumb, href })">
+    <div
+      class="card-thumb"
+      @click="thumb && imgLoaded && emit('thumb-click', { title, thumb, href })"
+    >
+      <!-- 画像（ロード後に表示） -->
       <img
         v-if="thumb"
         :src="thumb"
@@ -9,24 +13,29 @@
         class="thumb-img"
         :class="{ loaded: imgLoaded }"
         loading="lazy"
-        @load="imgLoaded = true"
+        @load="onLoad"
         @error="imgError = true"
       />
-      <!-- ロード中プレースホルダー -->
-      <div v-if="thumb && !imgLoaded && !imgError" class="thumb-placeholder">
-        <div class="placeholder-grid" />
-        <Icon name="bi:image" class="placeholder-icon" />
-      </div>
+
+      <!-- プレースホルダ：未ロード中 -->
+      <Transition name="fade">
+        <div v-if="!imgLoaded && !imgError" class="thumb-placeholder">
+          <div class="placeholder-grid" />
+          <Icon
+            :name="thumb ? 'bi:image' : (icon ?? 'bi:image')"
+            class="placeholder-icon"
+          />
+          <span v-if="!thumb && category" class="placeholder-label">{{ category }}</span>
+        </div>
+      </Transition>
+
       <!-- エラー時 -->
       <div v-if="imgError" class="thumb-placeholder thumb-error">
-        <Icon name="bi:image-alt" class="placeholder-icon" />
-      </div>
-      <!-- サムネイルなし -->
-      <div v-if="!thumb" class="thumb-placeholder">
         <div class="placeholder-grid" />
-        <span class="placeholder-label">{{ category }}</span>
+        <Icon name="bi:image-alt" class="placeholder-icon error" />
       </div>
-      <!-- 拡大ヒント -->
+
+      <!-- ホバーオーバーレイ（ロード済みのみ） -->
       <div v-if="thumb && imgLoaded" class="thumb-overlay">
         <Icon name="bi:arrows-fullscreen" class="overlay-icon" />
       </div>
@@ -54,9 +63,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   title:      string
   category?:  string
   icon?:      string
@@ -72,6 +81,28 @@ const emit = defineEmits<{
 
 const imgLoaded = ref(false)
 const imgError  = ref(false)
+
+// SSR でレンダリングされた img がすでにキャッシュ済みの場合
+// @load イベントが発火しないことがあるので onMounted で確認する
+onMounted(() => {
+  if (!props.thumb) {
+    imgLoaded.value = false
+    return
+  }
+  // Image オブジェクトで complete を確認
+  const img = new Image()
+  img.onload  = () => { imgLoaded.value = true }
+  img.onerror = () => { imgError.value  = true }
+  img.src = props.thumb
+  // すでにブラウザキャッシュにある場合は complete が true
+  if (img.complete && img.naturalWidth > 0) {
+    imgLoaded.value = true
+  }
+})
+
+function onLoad() {
+  imgLoaded.value = true
+}
 </script>
 
 <style scoped>
@@ -102,19 +133,21 @@ const imgError  = ref(false)
 }
 
 .thumb-img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 .thumb-img.loaded { opacity: 1; }
 
-/* プレースホルダー */
+/* プレースホルダ */
 .thumb-placeholder {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 0.5rem;
+  background: var(--surface2);
 }
 .placeholder-grid {
   position: absolute; inset: 0;
@@ -126,19 +159,18 @@ const imgError  = ref(false)
 }
 .placeholder-icon {
   width: 28px; height: 28px;
-  color: var(--text-muted); opacity: 0.4;
+  color: var(--text-muted); opacity: 0.5;
   position: relative; z-index: 1;
-  animation: pulse 1.5s ease-in-out infinite;
+  animation: pulse 1.8s ease-in-out infinite;
 }
+.placeholder-icon.error { animation: none; opacity: 0.25; }
 .placeholder-label {
   font-family: var(--mono); font-size: 0.55rem;
   letter-spacing: 0.18em; color: var(--text-muted);
   text-transform: uppercase; opacity: 0.5;
   position: relative; z-index: 1;
 }
-@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:0.8} }
-
-.thumb-error .placeholder-icon { animation: none; opacity: 0.25; }
+@keyframes pulse { 0%,100%{opacity:0.35} 50%{opacity:0.75} }
 
 /* ホバーオーバーレイ */
 .thumb-overlay {
@@ -150,6 +182,10 @@ const imgError  = ref(false)
 }
 .card-thumb:hover .thumb-overlay { opacity: 1; }
 .overlay-icon { width: 24px; height: 24px; color: var(--accent); }
+
+/* フェードトランジション */
+.fade-leave-active { transition: opacity 0.3s ease; }
+.fade-leave-to     { opacity: 0; }
 
 /* ── カード本文 ── */
 .card-body {
