@@ -23,11 +23,7 @@ jobs:
           FTP_USER:     ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          printf 'machine %s\nlogin %s\npassword %s\n' \
-            "$FTP_HOST" "$FTP_USER" "$FTP_PASSWORD" > ~/.netrc
-          chmod 600 ~/.netrc
-
-          # -d でフル通信ログを出す（パスワードはマスクされる）
+          # netrc を使わず open に直接ユーザー名/パスワードを渡す
           lftp -d -c "
             set ftp:ssl-auth TLS;
             set ftp:ssl-force yes;
@@ -37,7 +33,7 @@ jobs:
             set ssl:verify-certificate no;
             set net:timeout 15;
             set net:max-retries 1;
-            open ftp://$FTP_HOST;
+            open -u '$FTP_USER','$FTP_PASSWORD' ftp://$FTP_HOST;
             pwd;
             bye
           " 2>&1
