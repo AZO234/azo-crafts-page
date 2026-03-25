@@ -1,4 +1,4 @@
-name: Deploy to Sakura Internet (FTP)
+name: Deploy to Sakura Internet (FTP) - DEBUG
 
 on:
   push:
@@ -14,66 +14,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
-
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.dir }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Generate static site
-        run: pnpm run generate
-
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      - name: Deploy via lftp (FTPES)
+      - name: Auth debug
         env:
           FTP_HOST:     ${{ secrets.FTP_HOST }}
           FTP_USER:     ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          # printf で netrc を書く（インデント問題を回避）
           printf 'machine %s\nlogin %s\npassword %s\n' \
             "$FTP_HOST" "$FTP_USER" "$FTP_PASSWORD" > ~/.netrc
           chmod 600 ~/.netrc
 
-          # 確認（パスワードは表示しない）
-          echo "netrc machine: $(grep machine ~/.netrc)"
-          echo "netrc login:   $(grep login ~/.netrc)"
-
-          lftp -c "
+          # -d でフル通信ログを出す（パスワードはマスクされる）
+          lftp -d -c "
             set ftp:ssl-auth TLS;
             set ftp:ssl-force yes;
             set ftp:ssl-protect-data yes;
             set ftp:ssl-protect-list yes;
             set ftp:passive-mode yes;
             set ssl:verify-certificate no;
-            set net:timeout 30;
-            set net:max-retries 3;
+            set net:timeout 15;
+            set net:max-retries 1;
             open ftp://$FTP_HOST;
-            mirror --reverse --delete --verbose \
-              --exclude .htaccess \
-              --exclude-glob old/ \
-              .output/public/ /home/domisan/www/;
+            pwd;
             bye
-          "
-
-      - name: Done
-        run: echo "✅ Deployed to https://domisan.sakura.ne.jp/"
+          " 2>&1
