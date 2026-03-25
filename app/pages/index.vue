@@ -7,7 +7,7 @@
         <div class="hero-eyebrow">
           <Icon name="bi:person-fill" class="eyebrow-icon" />{{ t.hero.eyebrow }}
         </div>
-        <h2>AZO <em>crafts</em><br>page.</h2>
+        <h2>AZO <em>crafts</em> page.</h2>
         <p class="hero-desc">{{ t.hero.tagline }}<br>{{ t.hero.sub }}</p>
         <div class="hero-langs">
           <span v-for="l in langs" :key="l.name" class="lang-badge">
@@ -92,7 +92,7 @@ const { t, locale } = useAppState()
 
 useHead({
   title: 'AZO crafts page — Web Apps',
-  meta: [{ name: 'description', content: 'AZO234のWebアプリ・ツール一覧。3Dビューア・時計・タイマーなど。' }],
+  meta: [{ name: 'description', content: 'AZO234のポートフォリオ。Webアプリ・ツール一覧。3Dビューア・時計・タイマーなど。' }],
 })
 
 // ── モーダル ──────────────────────────────────────────────
@@ -121,7 +121,7 @@ const stats = computed(() => [
   { key: t.value.stats.github,     icon: 'bi:github',     value: 'AZO234' },
   { key: t.value.stats.lastUpdate, icon: 'bi:clock-fill', value: config.public.buildDate },
   { key: t.value.stats.mail,       icon: 'bi:envelope',   value: 'typesylph@gmail.com' },
-  { key: t.value.stats.license,    icon: 'bi:card-list',  value: 'MIT' },
+  { key: t.value.stats.license,    icon: 'bi:heart',  value: 'MIT' },
 ])
 
 const webApps = computed(() => {
