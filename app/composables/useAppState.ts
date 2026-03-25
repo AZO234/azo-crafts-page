@@ -12,8 +12,8 @@ const locale   = ref<Locale>('ja')
 const messages = {
   ja: {
     nav: {
-      webApps: 'WEB APPS', github: 'GITHUB',
-      articles: 'ARTICLES', shopping: 'SHOPPING', oldPage: 'OLD PAGE',
+      webApps: 'WEB APPS', emulator: 'EMULATOR',
+      articles: 'ARTICLES', shopping: 'SHOPPING', github: 'GITHUB', oldPage: 'OLD PAGE',
     },
     hero: {
       eyebrow: 'AZO234 · プロフィール',
@@ -33,8 +33,8 @@ const messages = {
   },
   en: {
     nav: {
-      webApps: 'WEB APPS', github: 'GITHUB',
-      articles: 'ARTICLES', shopping: 'SHOPPING', oldPage: 'OLD PAGE',
+      webApps: 'WEB APPS', emulator: 'EMULATOR',
+      articles: 'ARTICLES', shopping: 'SHOPPING', github: 'GITHUB', oldPage: 'OLD PAGE',
     },
     hero: {
       eyebrow: 'AZO234 · Profile',

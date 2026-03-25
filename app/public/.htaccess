@@ -21,15 +21,17 @@ AddDefaultCharset UTF-8
   RewriteEngine On
   RewriteBase /
 
-  # /old/ 以下はそのまま通す（旧ページ）
-  RewriteRule ^old(/.*)?$ - [L]
+  # /old/ 以下は除外（REQUEST_URI で判定）
+  RewriteCond %{REQUEST_URI} ^/old/ [OR]
+  RewriteCond %{REQUEST_URI} ^/old$
+  RewriteRule ^ - [L]
 
-  # 実ファイル・ディレクトリが存在する場合はそのまま
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
+  # 実ファイルはそのまま
+  RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
   # SSGページへのルーティング
+  RewriteRule ^emulator/?$ /emulator/index.html [L]
   RewriteRule ^github/?$   /github/index.html [L]
   RewriteRule ^articles/?$ /articles/index.html [L]
   RewriteRule ^shopping/?$ /shopping/index.html [L]
