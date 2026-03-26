@@ -133,7 +133,7 @@ const webApps = computed(() => {
       href: 'https://azo234.github.io/timesignal/', linkLabel: 'Open App' },
     { category: 'Mannen-clock',          icon: 'bi:clock-fill',         thumb: '/screenshots/mannen-clock.webp',
       title: isJa ? 'Web万年時計' : 'Web Perpetual Clock',
-      desc: isJa ? '田中久重の万年時計風、和時計・旧暦ガジェット。' : 'Hisashige Tanaka's \'Mannen-clock\'(1851).',
+      desc: isJa ? '田中久重の万年時計風、和時計・旧暦ガジェット。' : 'Hisashige Tanaka \'Mannen-clock\' (1851).',
       href: 'https://azo234.github.io/mannen-clock/', linkLabel: 'Open App' },
     { category: 'SBS 3D Viewer',      icon: 'bi:file-earmark-image', thumb: '/screenshots/stereo-viewer.webp',
       title: 'STEREO VIEWER',
