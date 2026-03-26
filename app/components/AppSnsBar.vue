@@ -41,7 +41,7 @@
 
     <!-- Buy Me a Coffee -->
     <a
-      href="https://coff.ee/azo234"
+      href="https://buymeacoffee.com/azo234"
       target="_blank"
       rel="noopener noreferrer"
     >
