@@ -163,8 +163,8 @@ const webApps = computed(() => {
 const shoppingSites = computed(() => {
   const isJa = locale.value === 'ja'
   return [
-    { category: isJa ? '国内' : 'Japan',  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
-      title: isJa ? 'かんたん価格調査' : 'Easy Price Check',
+    { category: isJa ? 'Japan' : 'Japan',  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
+      title: isJa ? 'KKC - かんたん価格調査' : 'Easy Price Check',
       desc: isJa ? '日本国内のショッピングサイトを一括検索。' : 'Search Japanese shopping sites at once.',
       href: 'https://domisan.sakura.ne.jp/kkc/kkc.php', linkLabel: 'Open' },
     { category: 'Global',         icon: 'bi:globe',  thumb: '/screenshots/spprice.webp',
@@ -176,28 +176,28 @@ const shoppingSites = computed(() => {
 
 const emulators = [
   {
-    tag: 'Emulator', icon: 'bi:controller',
+    tag: 'NP2kai', icon: 'bi:controller',
     thumb: '/screenshots/np2kai-article.webp',
     title: 'Neko Project II (NP2) 改変',
     desc: 'PC-98エミュレータ NP2 0.86 kai の改変・ビルド手順解説。',
     href: 'https://domisan.sakura.ne.jp/article/np2kai/np2kai.html',
   },
   {
-    tag: 'Retro', icon: 'bi:controller',
+    tag: 'RetroArch', icon: 'bi:controller',
     thumb: '/screenshots/retroarch.webp',
     title: 'RetroArch マルチエミュレータ',
     desc: 'マルチエミュレータシステム「RetroArch」の導入・設定ガイド。',
     href: 'https://domisan.sakura.ne.jp/article/retroarch/retroarch.html',
   },
   {
-    tag: 'Retro', icon: 'bi:cpu-fill',
+    tag: 'PC-8801', icon: 'bi:cpu-fill',
     thumb: '/screenshots/pc88.webp',
     title: 'PC-8801 保全情報',
     desc: 'レトロPC「PC-8801」の保全・メンテナンス情報。',
     href: 'https://domisan.sakura.ne.jp/article/pc88/pc88.html',
   },
   {
-    tag: 'Retro', icon: 'bi:cpu-fill',
+    tag: 'MSX', icon: 'bi:cpu-fill',
     thumb: '/screenshots/msx.webp',
     title: 'MSX 保全情報',
     desc: 'レトロPC「MSX」の保全・メンテナンス情報。',
