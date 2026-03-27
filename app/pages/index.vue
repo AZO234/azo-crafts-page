@@ -51,6 +51,20 @@
       </div>
     </section>
 
+    <!-- ── EMULATOR ── -->
+    <section class="section">
+      <SvSectionTitle icon="bi:controller">EMULATOR</SvSectionTitle>
+      <div class="cards-grid">
+        <SvCard
+          v-for="item in emulators" :key="item.title"
+          :title="item.title" :category="item.tag"
+          :icon="item.icon" :thumb="item.thumb"
+          :desc="item.desc" :href="item.href" link-label="Read"
+          @thumb-click="openModal"
+        />
+      </div>
+    </section>
+
     <!-- ── DONATE ── -->
     <div class="donate-bar">
       <div>
@@ -91,8 +105,8 @@ import { useAppState } from '~/composables/useAppState'
 const { t, locale } = useAppState()
 
 useHead({
-  title: 'AZO crafts page — Web Apps',
-  meta: [{ name: 'description', content: 'AZO234のポートフォリオ。Webアプリ・ツール一覧。3Dビューア・時計・タイマーなど。' }],
+  title: 'AZO crafts page — Works',
+  meta: [{ name: 'description', content: 'AZO234のポートフォリオ。Webアプリ・ツール・記事一覧。' }],
 })
 
 // ── モーダル ──────────────────────────────────────────────
@@ -137,7 +151,7 @@ const webApps = computed(() => {
       href: 'https://azo234.github.io/mannen-clock/', linkLabel: 'Open App' },
     { category: 'SBS 3D Viewer',      icon: 'bi:file-earmark-image', thumb: '/screenshots/stereo-viewer.webp',
       title: 'SBS STEREO VIEWER',
-      desc: isJa ? 'SBS形式（.jps/.pns）の立体画像疑似閲覧ビューア。アニメ・固定モード対応。' : 'Pseudo stereoscopic viewer for SBS images (.jps/.pns). Anim & Fixed modes.',
+      desc: isJa ? 'SBS形式（.jps/.pns）の立体画像疑似閲覧ビューア。アニメ出力対応。' : 'Pseudo stereoscopic viewer for SBS images (.jps/.pns). Anim & Fixed modes.',
       href: 'https://azo234.github.io/sbs-stereo-viewer/', linkLabel: 'Open App' },
     { category: 'Stroke font viewer',      icon: 'bi:type',               thumb: '/screenshots/stroke-font.webp',
       title: isJa ? 'ストロークフォントビューア' : 'Stroke Font Viewer',
@@ -159,6 +173,37 @@ const shoppingSites = computed(() => {
       href: 'https://domisan.sakura.ne.jp/spp/spp.php', linkLabel: 'Open' },
   ]
 })
+
+const emulators = [
+  {
+    tag: 'Emulator', icon: 'bi:controller',
+    thumb: '/screenshots/np2kai-article.webp',
+    title: 'Neko Project II (NP2) 改変',
+    desc: 'PC-98エミュレータ NP2 0.86 kai の改変・ビルド手順解説。',
+    href: 'https://domisan.sakura.ne.jp/article/np2kai/np2kai.html',
+  },
+  {
+    tag: 'Retro', icon: 'bi:controller',
+    thumb: '/screenshots/retroarch.webp',
+    title: 'RetroArch マルチエミュレータ',
+    desc: 'マルチエミュレータシステム「RetroArch」の導入・設定ガイド。',
+    href: 'https://domisan.sakura.ne.jp/article/retroarch/retroarch.html',
+  },
+  {
+    tag: 'Retro', icon: 'bi:cpu-fill',
+    thumb: '/screenshots/pc88.webp',
+    title: 'PC-8801 保全情報',
+    desc: 'レトロPC「PC-8801」の保全・メンテナンス情報。',
+    href: 'https://domisan.sakura.ne.jp/article/pc88/pc88.html',
+  },
+  {
+    tag: 'Retro', icon: 'bi:cpu-fill',
+    thumb: '/screenshots/msx.webp',
+    title: 'MSX 保全情報',
+    desc: 'レトロPC「MSX」の保全・メンテナンス情報。',
+    href: 'https://domisan.sakura.ne.jp/article/msx/msx.html',
+  },
+]
 </script>
 
 <style scoped>
