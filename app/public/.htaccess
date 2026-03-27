@@ -31,10 +31,8 @@ AddDefaultCharset UTF-8
   RewriteRule ^ - [L]
 
   # SSGページへのルーティング
-  RewriteRule ^emulator/?$ /emulator/index.html [L]
   RewriteRule ^github/?$   /github/index.html [L]
   RewriteRule ^articles/?$ /articles/index.html [L]
-  RewriteRule ^shopping/?$ /shopping/index.html [L]
 
   # それ以外はトップへ
   RewriteRule ^ /index.html [L]

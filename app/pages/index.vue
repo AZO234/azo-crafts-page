@@ -74,7 +74,7 @@
         <div class="donate-btc">BTC: 39Ti3CTg9wuquTXt2ELH32BF1Qj2NQjsja</div>
       </div>
       <div class="donate-right">
-        <a href="https://coff.ee/azo234" target="_blank" rel="noopener noreferrer" class="coffee-btn">
+        <a href="https://buymeacoffee/azo234" target="_blank" rel="noopener noreferrer" class="coffee-btn">
           Buy Me a Coffee
         </a>
         <a href="https://github.com/sponsors/azo234" target="_blank" rel="noopener noreferrer" class="coffee-btn sponsor-btn">
@@ -135,7 +135,8 @@ const stats = computed(() => [
   { key: t.value.stats.github,     icon: 'bi:github',     value: 'AZO234' },
   { key: t.value.stats.lastUpdate, icon: 'bi:clock-fill', value: config.public.buildDate },
   { key: t.value.stats.mail,       icon: 'bi:envelope',   value: 'typesylph@gmail.com' },
-  { key: t.value.stats.license,    icon: 'bi:heart',  value: 'MIT' },
+  { key: t.value.stats.license,    icon: 'bi:file-earmark',  value: 'GPL3.0 / MIT' },
+  { key: t.value.stats.love,       icon: 'bi:heart',  value: 'Cat😺' },
 ])
 
 const webApps = computed(() => {
