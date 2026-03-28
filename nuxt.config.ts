@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-icon',
     '@vite-pwa/nuxt',
+    'nuxt-gtag',
   ],
 
   runtimeConfig: {
@@ -66,6 +67,10 @@ export default defineNuxtConfig({
       routes: ['/', '/github', '/articles'],
       crawlLinks: true,
     },
+  },
+
+  gtag: {
+    id: 'G-7113BVBJ8V',
   },
 
   app: {

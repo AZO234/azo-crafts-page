@@ -26,7 +26,7 @@ const messages = {
     stats: {
       location: 'LOCATION', github: 'GITHUB',
       lastUpdate: 'LAST UPDATE', mail: 'MAIL', license: 'LICENSE',
-      love: 'love',
+      love: 'LOVE',
     },
     donate: { label: 'Please donate to my researching!' },
     status: { page: 'PAGE', lang: 'LANG', update: 'LAST UPDATE' },
@@ -47,7 +47,7 @@ const messages = {
     stats: {
       location: 'LOCATION', github: 'GITHUB',
       lastUpdate: 'LAST UPDATE', mail: 'MAIL', license: 'LICENSE',
-      love: 'love',
+      love: 'LOVE',
     },
     donate: { label: 'Please donate to my researching!' },
     status: { page: 'PAGE', lang: 'LANG', update: 'LAST UPDATE' },

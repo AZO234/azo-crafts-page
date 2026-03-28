@@ -42,6 +42,9 @@ importers:
       '@vite-pwa/nuxt':
         specifier: ^1.1.1
         version: 1.1.1(magicast@0.5.2)(vite@7.3.1(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3))(workbox-build@7.4.0)(workbox-window@7.4.0)
+      nuxt-gtag:
+        specifier: ^4.1.0
+        version: 4.1.0(magicast@0.5.2)
       typescript:
         specifier: ^5.4.0
         version: 5.9.3
@@ -3410,6 +3413,9 @@ packages:
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+
+  nuxt-gtag@4.1.0:
+    resolution: {integrity: sha512-2TL7RUA8N8NYGbY4UZ9IqKyMZMgO9cCGu6yqadUU8RF+Y81PXI+k+1giIA11XXStaJoGXaXeNsBUIJXn1tUy3A==}
 
   nuxt-icon@0.6.10:
     resolution: {integrity: sha512-S9zHVA66ox4ZSpMWvCjqKZC4ZogC0s2z3vZs+M4D95YXGPEXwxDZu+insMKvkbe8+k7gvEmtTk0eq3KusKlxiw==}
@@ -8566,6 +8572,15 @@ snapshots:
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
+
+  nuxt-gtag@4.1.0(magicast@0.5.2):
+    dependencies:
+      '@nuxt/kit': 4.4.2(magicast@0.5.2)
+      defu: 6.1.4
+      pathe: 2.0.3
+      ufo: 1.6.3
+    transitivePeerDependencies:
+      - magicast
 
   nuxt-icon@0.6.10(magicast@0.5.2)(vite@7.3.1(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3)):
     dependencies:
