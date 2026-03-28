@@ -42,13 +42,6 @@ function openModal(p: { title: string; thumb: string; href?: string }) {
 
 const projects = [
   {
-    tag: 'Web App', icon: 'simple-icons:vuedotjs',
-    thumb: '/screenshots/stereo-viewer-gh.webp',
-    title: 'STEREO VIEWER',
-    desc: 'SBS（.jps/.pns）立体画像疑似閲覧ビューア。Vue3 + TypeScript + Bootstrap5。',
-    href: 'https://github.com/AZO234/stereo-viewer', linkLabel: 'GitHub',
-  },
-  {
     tag: 'Emulator', icon: 'bi:controller',
     thumb: '/screenshots/np2kai.webp',
     title: 'Neko Project II kai',
@@ -82,13 +75,6 @@ const projects = [
     title: 'RaspberryPi BareMetal',
     desc: 'Raspberry Pi 2/3 用 TOPPERS/FMP・ASP3 ベアメタル環境。',
     href: 'https://github.com/AZO234/RaspberryPi_BareMetal', linkLabel: 'GitHub',
-  },
-  {
-    tag: 'Dev Tool', icon: 'bi:tools',
-    thumb: '/screenshots/codeviz.webp',
-    title: 'CodeViz for GCC 8.3.0',
-    desc: 'GCC 8.3.0 対応コールグラフ可視化ツール。',
-    href: 'https://github.com/AZO234/codeviz', linkLabel: 'GitHub',
   },
   {
     tag: 'Python', icon: 'simple-icons:python',

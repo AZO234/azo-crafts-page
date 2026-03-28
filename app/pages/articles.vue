@@ -99,13 +99,6 @@ const articles = [
   },
   {
     tag: 'Windows', icon: 'bi:tools',
-    thumb: '/screenshots/w10-mente.webp',
-    title: 'Windows 10 メンテナンス方法',
-    desc: 'Windows 10の保全・最適化・メンテナンス総合ガイド。',
-    href: 'https://domisan.sakura.ne.jp/article/w10mente/w10mente.html',
-  },
-  {
-    tag: 'Windows', icon: 'bi:tools',
     thumb: '/screenshots/recuva.webp',
     title: '削除済みファイル復活「Recuva」',
     desc: '削除したファイルを復元するソフトウェア「Recuva」の使い方。',
