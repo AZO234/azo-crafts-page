@@ -42,7 +42,7 @@ function openModal(p: { title: string; thumb: string; href?: string }) {
 
 const projects = [
   {
-    tag: 'Emulator', icon: 'bi:controller',
+    tag: 'NP2kai', icon: 'bi:controller',
     thumb: '/screenshots/np2kai.webp',
     title: 'Neko Project II kai',
     desc: 'PC-98エミュレータ NP2 0.86 kai。各種プラットフォーム対応。',
@@ -70,14 +70,14 @@ const projects = [
     href: 'https://github.com/AZO234/RAcross_mac', linkLabel: 'GitHub',
   },
   {
-    tag: 'Bare Metal', icon: 'simple-icons:raspberrypi',
+    tag: 'RPI Baremetal', icon: 'simple-icons:raspberrypi',
     thumb: '/screenshots/raspi-baremetal.webp',
     title: 'RaspberryPi BareMetal',
     desc: 'Raspberry Pi 2/3 用 TOPPERS/FMP・ASP3 ベアメタル環境。',
     href: 'https://github.com/AZO234/RaspberryPi_BareMetal', linkLabel: 'GitHub',
   },
   {
-    tag: 'Python', icon: 'simple-icons:python',
+    tag: 'Diablo II', icon: 'simple-icons:python',
     thumb: '/screenshots/pyd2s.webp',
     title: 'Diablo II save data tweak',
     desc: 'Diablo II セーブデータ改変ツール (pyd2s fork)。',

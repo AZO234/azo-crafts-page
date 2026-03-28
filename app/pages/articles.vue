@@ -42,17 +42,17 @@ function openModal(p: { title: string; thumb: string; href?: string }) {
 
 const articles = [
   {
-    tag: 'Raspberry Pi', icon: 'simple-icons:raspberrypi',
+    tag: 'RPi TOPPERS', icon: 'simple-icons:raspberrypi',
     thumb: '/screenshots/rp-toppers.webp',
     title: 'RaspberryPiでTOPPERS',
-    desc: 'Raspberry Pi 2/3用TOPPERS/FMP、Pi Zero/1/2/3用TOPPERS/ASP3。TOPPERSプロジェクトにも掲載。',
+    desc: 'Raspberry Pi用TOPPERS（TRON系OS）',
     href: 'https://domisan.sakura.ne.jp/article/rp_toppers/rp_toppers.html',
   },
   {
     tag: 'Linux Driver', icon: 'simple-icons:linux',
     thumb: '/screenshots/psxpad-linux.webp',
     title: 'PS1/2 SPI Interface Driver for Linux',
-    desc: 'PS1/2コントローラをSPIバスに直結するLinuxドライバ。Linux kernel 4.12 に収録。',
+    desc: 'PS1/2コントローラをSPIバスに直結するLinuxドライバ。Linux kernelに収録。',
     href: 'https://domisan.sakura.ne.jp/article/psxpad/psxpad.html',
   },
   {
@@ -112,14 +112,14 @@ const articles = [
     href: 'https://domisan.sakura.ne.jp/article/photorec/photorec.html',
   },
   {
-    tag: 'CAD / Font', icon: 'bi:type',
+    tag: 'CAD Font', icon: 'bi:type',
     thumb: '/screenshots/cadfont.webp',
     title: 'CAD用ストロークフォント「AZOmix」',
     desc: 'CAD向けベクターフォント「AZOmix」の解説・配布。',
     href: 'https://domisan.sakura.ne.jp/article/cadfont/cadfont.html',
   },
   {
-    tag: '曲線', icon: 'bi:bezier2',
+    tag: 'CURVE', icon: 'bi:bezier2',
     thumb: '/screenshots/curve.webp',
     title: '曲線について',
     desc: 'ベジェ曲線・スプライン曲線などの数学的解説。',
