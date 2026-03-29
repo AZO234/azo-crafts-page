@@ -166,7 +166,7 @@ const shoppingSites = computed(() => {
   return [
     { category: isJa ? 'Japan' : 'Japan',  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
       title: isJa ? 'KKC - かんたん価格調査' : 'Easy Price Check',
-      desc: isJa ? '日本国内のショッピングサイトを一括検索。' : 'Search Japanese shopping sites at once.',
+      desc: isJa ? '日本国内のショッピングサイトを一括検索。バーコード読取対応。' : 'Search Japanese shopping sites at once. Barcode reading compatible.',
       href: 'https://domisan.sakura.ne.jp/kkc/kkc.php', linkLabel: 'Open' },
     { category: 'Global',         icon: 'bi:globe',  thumb: '/screenshots/spprice.webp',
       title: 'SpPrice.Net',
