@@ -229,7 +229,7 @@ const other = [
     tag: 'SBSShot', icon: 'bi:controller',
     thumb: '/screenshots/sbsshot.png',
     title: 'SBSShot',
-    desc: 'SBS(Side-By-Side)スクリーンショット Minecraft mod。',
+    desc: 'SBS(Side-By-Side) 3Dスクリーンショット Minecraft mod。',
     href: 'https://github.com/AZO234/sbsshot',
   },
 ]
