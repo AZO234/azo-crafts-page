@@ -6,12 +6,6 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://domisan.sakura.ne.jp/sudoku/sudoku.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
         <loc>https://domisan.sakura.ne.jp/countdown/countdown.html</loc>
         <lastmod>2020-10-30</lastmod>
         <changefreq>yearly</changefreq>
@@ -31,18 +25,6 @@
     </url>
     <url>
         <loc>https://domisan.sakura.ne.jp/metronome/metronome_opus.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/cygwin/cygwin.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/dtlite/dtlite.html</loc>
         <lastmod>2020-10-30</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
@@ -72,18 +54,6 @@
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://domisan.sakura.ne.jp/article/w7mente/w7mente.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/w10mente/w10mente.html</loc>
-        <lastmod>2021-05-03</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
         <loc>https://domisan.sakura.ne.jp/article/msx/msx.html</loc>
         <lastmod>2020-10-30</lastmod>
         <changefreq>yearly</changefreq>
@@ -102,22 +72,10 @@
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://domisan.sakura.ne.jp/article/raspberrypi/rp_qemu.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
         <loc>https://domisan.sakura.ne.jp/article/rp_toppers/rp_toppers.html</loc>
         <lastmod>2019-02-18</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/ub_openssl/ub_openssl.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
     </url>
     <url>
         <loc>https://domisan.sakura.ne.jp/article/cadfont/cadfont.html</loc>
@@ -138,12 +96,6 @@
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://domisan.sakura.ne.jp/article/ub_ut2004/ub_ut2004.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
         <loc>https://domisan.sakura.ne.jp/article/arduino/arduino.html</loc>
         <lastmod>2020-10-30</lastmod>
         <changefreq>yearly</changefreq>
@@ -157,42 +109,6 @@
     </url>
     <url>
         <loc>https://domisan.sakura.ne.jp/article/ts/ts.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/mpo/mpo.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/mpo/mpo_test.html</loc>
-        <lastmod>2016-08-13</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/mpo/mpo_test2.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/mpo/mpo_test3.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/mpo/mpo_test4.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/mpo2gif/mpo2gif.html</loc>
         <lastmod>2020-10-30</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
@@ -235,24 +151,6 @@
     </url>
     <url>
         <loc>https://domisan.sakura.ne.jp/article/privacyporicy/privacyporicy.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/azo_ssb/azo_ssb.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/azo_ssb/azo_ssb_samples.html</loc>
-        <lastmod>2020-10-30</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-    <url>
-        <loc>https://domisan.sakura.ne.jp/article/vlcmp/vlcmp.html</loc>
         <lastmod>2020-10-30</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
