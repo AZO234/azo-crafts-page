@@ -156,7 +156,7 @@ const webApps = computed(() => {
       href: 'https://azo234.github.io/sbs-stereo-viewer/', linkLabel: 'Open App' },
     { category: 'Sudoku Solver',      icon: 'bi:type',               thumb: '/screenshots/sudoku.webp',
       title: isJa ? '数独解答プログラム' : 'Sudoku Solver',
-      desc: isJa ? '数独をブルートフォースで解答するアプリ。' : 'Solve Sudoku with brute-force.',
+      desc: isJa ? '数独をブルートフォースで解答するアプリ。' : 'Solve Sudoku with brute-force method.',
       href: 'https://azo234.github.io/sudoku-solver/', linkLabel: 'Open App' },
     { category: 'Stroke font viewer',      icon: 'bi:type',               thumb: '/screenshots/stroke-font.webp',
       title: isJa ? 'ストロークフォントビューア' : 'Stroke Font Viewer',
@@ -170,7 +170,7 @@ const shoppingSites = computed(() => {
   return [
     { category: isJa ? 'Japan' : 'Japan',  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
       title: isJa ? 'KKC - かんたん価格調査' : 'Easy Price Check',
-      desc: isJa ? '日本国内のショッピングサイトを一括検索。バーコード読取対応。' : 'Search Japanese shopping sites at once. Barcode reading compatible.',
+      desc: isJa ? '日本国内のショッピングサイトを一括検索。バーコード読み取り対応。' : 'Search Japanese shopping sites at once. Barcode reading compatible.',
       href: 'https://domisan.sakura.ne.jp/kkc/kkc.php', linkLabel: 'Open' },
     { category: 'Global',         icon: 'bi:globe',  thumb: '/screenshots/spprice.webp',
       title: 'SpPrice.Net',
