@@ -65,6 +65,20 @@
       </div>
     </section>
 
+    <!-- ── OTHER ── -->
+    <section class="section">
+      <SvSectionTitle icon="bi:controller">OTHER</SvSectionTitle>
+      <div class="cards-grid">
+        <SvCard
+          v-for="item in other" :key="item.title"
+          :title="item.title" :category="item.tag"
+          :icon="item.icon" :thumb="item.thumb"
+          :desc="item.desc" :href="item.href" link-label="Read"
+          @thumb-click="openModal"
+        />
+      </div>
+    </section>
+
     <!-- ── DONATE ── -->
     <div class="donate-bar">
       <div>
@@ -171,7 +185,7 @@ const shoppingSites = computed(() => {
     { category: isJa ? 'Japan' : 'Japan',  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
       title: isJa ? 'KKC - かんたん価格調査' : 'Easy Price Check',
       desc: isJa ? '日本国内のショッピングサイトを一括検索。バーコード読み取り対応。' : 'Search Japanese shopping sites at once. Barcode reading compatible.',
-      href: 'https://domisan.sakura.ne.jp/kkc/kkc.php', linkLabel: 'Open' },
+      href: 'https://domisan.sakura.ne.jp/kkc/', linkLabel: 'Open App' },
     { category: 'Global',         icon: 'bi:globe',  thumb: '/screenshots/spprice.webp',
       title: 'SpPrice.Net',
       desc: isJa ? '海外ショッピングサイトを一括検索。通貨を自動換算。' : 'Search worldwide. Auto currency conversion.',
@@ -207,6 +221,16 @@ const emulators = [
     title: 'MSX 保全情報',
     desc: 'レトロPC「MSX」の保全・メンテナンス情報。',
     href: 'https://domisan.sakura.ne.jp/article/msx/msx.html',
+  },
+]
+
+const other = [
+  {
+    tag: 'SBSShot', icon: 'bi:controller',
+    thumb: '/screenshots/sbsshot.png',
+    title: 'SBSShot',
+    desc: 'SBS(Side-By-Side)スクリーンショット Minecraft mod。',
+    href: 'https://github.com/AZO234/sbsshot',
   },
 ]
 </script>
