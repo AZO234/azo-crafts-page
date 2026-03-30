@@ -154,14 +154,14 @@ const webApps = computed(() => {
       title: 'SBS STEREO VIEWER',
       desc: isJa ? 'SBS形式（.jps/.pns）の立体画像疑似閲覧ビューア。アニメ出力対応。' : 'Pseudo stereoscopic viewer for SBS images (.jps/.pns). Anim & Fixed modes.',
       href: 'https://azo234.github.io/sbs-stereo-viewer/', linkLabel: 'Open App' },
-    { category: 'Stroke font viewer',      icon: 'bi:type',               thumb: '/screenshots/stroke-font.webp',
-      title: isJa ? 'ストロークフォントビューア' : 'Stroke Font Viewer',
-      desc: isJa ? 'ストローク（ベクター）フォントを閲覧・加工するアプリ。' : 'View and edit stroke vector fonts.',
-      href: 'https://azo234.github.io/stroke-font-viewer/', linkLabel: 'Open App' },
     { category: 'Sudoku Solver',      icon: 'bi:type',               thumb: '/screenshots/sudoku.webp',
       title: isJa ? '数独解答プログラム' : 'Sudoku Solver',
       desc: isJa ? '数独をブルートフォースで解答するアプリ。' : 'Solve Sudoku with brute-force.',
       href: 'https://azo234.github.io/sudoku-solver/', linkLabel: 'Open App' },
+    { category: 'Stroke font viewer',      icon: 'bi:type',               thumb: '/screenshots/stroke-font.webp',
+      title: isJa ? 'ストロークフォントビューア' : 'Stroke Font Viewer',
+      desc: isJa ? 'ストローク（ベクター）フォントを閲覧・加工するアプリ。' : 'View and edit stroke vector fonts.',
+      href: 'https://azo234.github.io/stroke-font-viewer/', linkLabel: 'Open App' },
   ]
 })
 
