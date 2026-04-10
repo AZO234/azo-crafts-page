@@ -37,20 +37,6 @@
       </div>
     </section>
 
-    <!-- ── SHOPPING ── -->
-    <section class="section">
-      <SvSectionTitle icon="bi:cart3">{{ t.sections.shopping }}</SvSectionTitle>
-      <div class="cards-grid cards-grid--2">
-        <SvCard
-          v-for="site in shoppingSites" :key="site.title"
-          :title="site.title" :category="site.category"
-          :icon="site.icon" :thumb="site.thumb"
-          :desc="site.desc" :href="site.href" :link-label="site.linkLabel"
-          @thumb-click="openModal"
-        />
-      </div>
-    </section>
-
     <!-- ── EMULATOR ── -->
     <section class="section">
       <SvSectionTitle icon="bi:controller">EMULATOR</SvSectionTitle>
@@ -156,6 +142,10 @@ const stats = computed(() => [
 const webApps = computed(() => {
   const isJa = locale.value === 'ja'
   return [
+    { category: PRICE SEARCH,  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
+      title: isJa ? 'KKC - かんたん価格調査' : 'Easy Price Check',
+      desc: isJa ? '日本国内のショッピングサイトを一括検索。バーコード読み取り対応。' : 'Search Japanese shopping sites at once. Barcode reading compatible.',
+      href: 'https://domisan.sakura.ne.jp/kkc/', linkLabel: 'Open App' },
     { category: 'Timesignal',          icon: 'bi:clock-fill',         thumb: '/screenshots/timesignal.webp',
       title: isJa ? 'インターネット時報' : 'Internet Time Signal',
       desc: isJa ? '日本標準時を精密に音声でお知らせ。' : 'JST signal viewer via the internet.',
@@ -176,20 +166,6 @@ const webApps = computed(() => {
       title: isJa ? 'ストロークフォントビューア' : 'Stroke Font Viewer',
       desc: isJa ? 'ストローク（ベクター）フォントを閲覧・加工するアプリ。' : 'View and edit stroke vector fonts.',
       href: 'https://azo234.github.io/stroke-font-viewer/', linkLabel: 'Open App' },
-  ]
-})
-
-const shoppingSites = computed(() => {
-  const isJa = locale.value === 'ja'
-  return [
-    { category: isJa ? 'Japan' : 'Japan',  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
-      title: isJa ? 'KKC - かんたん価格調査' : 'Easy Price Check',
-      desc: isJa ? '日本国内のショッピングサイトを一括検索。バーコード読み取り対応。' : 'Search Japanese shopping sites at once. Barcode reading compatible.',
-      href: 'https://domisan.sakura.ne.jp/kkc/', linkLabel: 'Open App' },
-    { category: 'Global',         icon: 'bi:globe',  thumb: '/screenshots/spprice.webp',
-      title: 'SpPrice.Net',
-      desc: isJa ? '海外ショッピングサイトを一括検索。通貨を自動換算。' : 'Search worldwide. Auto currency conversion.',
-      href: 'https://domisan.sakura.ne.jp/spp/spp.php', linkLabel: 'Open' },
   ]
 })
 
