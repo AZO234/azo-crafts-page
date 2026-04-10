@@ -144,7 +144,7 @@ const webApps = computed(() => {
   return [
     { category: PRICE SEARCH,  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
       title: isJa ? 'KKC - かんたん価格調査' : 'Easy Price Check',
-      desc: isJa ? '日本国内のショッピングサイトを一括検索。バーコード読み取り対応。' : 'Search Japanese shopping sites at once. Barcode reading compatible.',
+      desc: isJa ? 'ショッピングサイトを一括検索。バーコード読み取り対応。' : 'Search shopping sites at once. Barcode reading compatible.',
       href: 'https://domisan.sakura.ne.jp/kkc/', linkLabel: 'Open App' },
     { category: 'Timesignal',          icon: 'bi:clock-fill',         thumb: '/screenshots/timesignal.webp',
       title: isJa ? 'インターネット時報' : 'Internet Time Signal',
