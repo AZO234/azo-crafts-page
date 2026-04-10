@@ -142,7 +142,7 @@ const stats = computed(() => [
 const webApps = computed(() => {
   const isJa = locale.value === 'ja'
   return [
-    { category: PRICE SEARCH,  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
+    { category: 'PRICE SEARCH',  icon: 'bi:cart3', thumb: '/screenshots/kkc.webp',
       title: isJa ? 'KKC - かんたん価格調査' : 'Easy Price Check',
       desc: isJa ? 'ショッピングサイトを一括検索。バーコード読み取り対応。' : 'Search shopping sites at once. Barcode reading compatible.',
       href: 'https://domisan.sakura.ne.jp/kkc/', linkLabel: 'Open App' },
